@@ -1,1 +1,6 @@
-<resources></resources>
+<resources>
+    <!-- menu -->
+    <string name="menu_main_bottom_news">Top News</string>
+    <string name="menu_main_bottom_category">Categories</string>
+    <string name="menu_main_bottom_save">Saved</string>
+</resources>
