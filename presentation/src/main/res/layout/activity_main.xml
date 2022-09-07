@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
+
+        <include
+            android:id="@+id/main_toolbar"
+            layout="@layout/base_toolbar"
+            app:isBackVisible="@{vm.toolbarState.second}"
+            app:title="@{vm.toolbarState.first}" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_nav_container"
@@ -22,9 +29,9 @@
             android:id="@+id/main_nv_bottom"
             android:layout_width="0dp"
             android:layout_height="72dp"
+            android:background="@color/purple"
             android:paddingTop="8dp"
             android:paddingBottom="4dp"
-            android:background="@color/purple"
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemTextColor="@drawable/menu_selector_color"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,4 +40,11 @@
             app:menu="@menu/menu_main" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="vm"
+            type="co.kr.hoyaho.presentation.ui.main.MainViewModel" />
+    </data>
 </layout>
