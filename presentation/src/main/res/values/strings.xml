@@ -3,4 +3,13 @@
     <string name="menu_main_bottom_news">Top News</string>
     <string name="menu_main_bottom_category">Categories</string>
     <string name="menu_main_bottom_save">Saved</string>
+
+    <!-- news -->
+    <string name="news_toolbar_title">NewsApp</string>
+
+    <!-- category -->
+    <string name="category_toolbar_title">Category</string>
+
+    <!-- save -->
+    <string name="save_toolbar_title">Saved News</string>
 </resources>
