@@ -18,8 +18,7 @@ class NetworkErrorHandlerImpl(
                     in 500..599 -> NetworkError.InternalServer
                     in 400..499 -> {
                         val code = exception.code()
-                        val message = extractErrorMessage(exception.response())
-                        NetworkError.BadRequest(code, message)
+                        NetworkError.BadRequest(code)
                     }
                     else -> NetworkError.Unknown
                 }
@@ -27,15 +26,4 @@ class NetworkErrorHandlerImpl(
             else -> NetworkError.Unknown
         }
     }
-
-    private fun extractErrorMessage(response: Response<*>?): String {
-        val converter = retrofit.responseBodyConverter<ErrorResponse>(
-            ErrorResponse::class.java,
-            arrayOfNulls(0)
-        )
-        val baseResponse = response?.errorBody()?.let { converter.convert(it) }
-        return baseResponse?.message.orEmpty()
-    }
-
-    private data class ErrorResponse(val message: String, val documentation_url: String)
 }
