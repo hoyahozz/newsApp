@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.kr.hoyaho.domain.model.News
+import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.ItemNewsBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -28,7 +29,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
             Glide.with(binding.root.context)
                 .load(item.imgUrl)
+                .placeholder(R.color.gray)
                 .transform(CenterCrop(), RoundedCorners(4))
+                .error(R.drawable.img_not_found)
                 .into(binding.thumbnail)
         }
     }
