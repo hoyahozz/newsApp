@@ -10,7 +10,9 @@ import androidx.fragment.app.activityViewModels
 import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.FragmentCategoryBinding
 import co.kr.hoyaho.presentation.ui.main.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryFragment : Fragment() {
 
     private var _binding: FragmentCategoryBinding? = null
