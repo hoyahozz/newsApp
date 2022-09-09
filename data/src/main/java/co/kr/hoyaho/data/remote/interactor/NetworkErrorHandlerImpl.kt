@@ -3,13 +3,9 @@ package co.kr.hoyaho.data.remote.interactor
 import co.kr.hoyaho.domain.NetworkError
 import co.kr.hoyaho.domain.interactor.NetworkErrorHandler
 import retrofit2.HttpException
-import retrofit2.Response
-import retrofit2.Retrofit
 import java.net.SocketTimeoutException
 
-class NetworkErrorHandlerImpl(
-    private val retrofit: Retrofit
-) : NetworkErrorHandler {
+class NetworkErrorHandlerImpl : NetworkErrorHandler {
     override fun getError(exception: Throwable): NetworkError {
         return when (exception) {
             is SocketTimeoutException -> NetworkError.Timeout

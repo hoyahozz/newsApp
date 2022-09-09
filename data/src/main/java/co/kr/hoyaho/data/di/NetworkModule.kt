@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    // 과제 전용으로 제출하는 것이므로 BaseUrl 보호 작업 진행 X
     private const val BASE_URL = "https://newsapi.org/v2/"
     private const val TIME_OUT_COUNT: Long = 10
 
@@ -60,9 +59,7 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideNetworkHandler(
-        retrofit: Retrofit
-    ): NetworkErrorHandler {
-        return NetworkErrorHandlerImpl(retrofit)
+    fun provideNetworkHandler(): NetworkErrorHandler {
+        return NetworkErrorHandlerImpl()
     }
 }
