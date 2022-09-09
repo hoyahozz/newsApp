@@ -1,8 +1,9 @@
 package co.kr.hoyaho.presentation.ui.news
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.kr.hoyaho.domain.NetworkResult
 import co.kr.hoyaho.domain.model.News
@@ -15,8 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
+    application: Application,
     private val headLineNewsUseCase: GetHeadLineNewsUseCase
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     private val _news: MutableLiveData<List<News>> = MutableLiveData()
     val news: LiveData<List<News>> get() = _news
