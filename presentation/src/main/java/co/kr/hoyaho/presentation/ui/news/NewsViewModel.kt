@@ -38,7 +38,7 @@ class NewsViewModel @Inject constructor(
                     _news.value = news
                 }
                 is NetworkResult.Error -> {
-                    val msg = result.errorType.toErrorMessage()
+                    val msg = result.errorType.toErrorMessage(getApplication<Application>().applicationContext)
                     _showToast.value = Event(msg)
                 }
             }

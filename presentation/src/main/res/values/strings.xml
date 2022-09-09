@@ -17,4 +17,5 @@
     <string name="error_unknown">A network error has occurred.\nPlease run again in a few minutes.</string>
     <string name="error_internal_server">An error occurred on the server.\nPlease run again in a few minutes.</string>
     <string name="error_timeout">The request timed out.\nPlease run again in a few minutes.</string>
+    <string name="error_bad_request">Error Code : %1$d, Invalid request.\nPlease run again in a few minutes.</string>
 </resources>
