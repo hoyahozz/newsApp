@@ -1,5 +1,7 @@
 package co.kr.hoyaho.domain.model
 
+import java.io.Serializable
+
 /**
  * @property title : 뉴스 제목
  * @property author : 뉴스 작성자
@@ -14,4 +16,4 @@ data class News(
     val imgUrl: String,
     val elapsed: String,
     val content: String
-)
+) : Serializable
