@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/wanted_navigation"
     app:startDestination="@id/newsFragment">
 
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="co.kr.hoyaho.presentation.ui.news.NewsFragment"
-        android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
-    <fragment
-        android:id="@+id/categoryFragment"
-        android:name="co.kr.hoyaho.presentation.ui.category.CategoryFragment"
-        android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
-    <fragment
-        android:id="@+id/saveFragment"
-        android:name="co.kr.hoyaho.presentation.ui.save.SaveFragment"
-        android:label="fragment_save"
-        tools:layout="@layout/fragment_save" />
+    <include app:graph="@navigation/nav_news" />
+    <include app:graph="@navigation/nav_category" />
+    <include app:graph="@navigation/nav_save" />
 </navigation>

@@ -9,8 +9,12 @@
         android:paddingBottom="17dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/container"
             android:layout_width="0dp"
             android:layout_height="238dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             app:cardCornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
