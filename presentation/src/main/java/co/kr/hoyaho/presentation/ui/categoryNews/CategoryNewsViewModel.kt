@@ -29,6 +29,9 @@ class CategoryNewsViewModel @Inject constructor(
     private val _showToast: MutableLiveData<Event<String>> = MutableLiveData()
     val showToast: LiveData<Event<String>> = _showToast
 
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun setCategory(category: String) {
         _category = category
         fetchCategoryNews()
@@ -36,15 +39,18 @@ class CategoryNewsViewModel @Inject constructor(
 
     private fun fetchCategoryNews() {
         viewModelScope.launch {
+            _isLoading.postValue(true)
             when (val result = categoryNewsUseCase.invoke(_category)) {
                 is NetworkResult.Success -> {
                     val news = result.data
                     _news.value = news
+                    _isLoading.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     val msg =
                         result.errorType.toErrorMessage(getApplication<Application>().applicationContext)
                     _showToast.value = Event(msg)
+                    _isLoading.postValue(false)
                 }
             }
         }

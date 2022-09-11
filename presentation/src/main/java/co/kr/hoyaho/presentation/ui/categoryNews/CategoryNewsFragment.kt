@@ -19,6 +19,7 @@ import co.kr.hoyaho.presentation.ui.adapter.NewsAdapter
 import co.kr.hoyaho.presentation.ui.adapter.NewsClickListener
 import co.kr.hoyaho.presentation.ui.main.MainViewModel
 import co.kr.hoyaho.presentation.ui.util.EventObserver
+import co.kr.hoyaho.presentation.ui.util.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +34,10 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
     private val args: CategoryNewsFragmentArgs by navArgs()
 
     private lateinit var adapter: NewsAdapter
+
+    private val loadingDialog: LoadingDialog by lazy {
+        LoadingDialog(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +72,11 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
 
         viewModel.news.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if(it) loadingDialog.show()
+            else loadingDialog.dismiss()
         }
     }
 
