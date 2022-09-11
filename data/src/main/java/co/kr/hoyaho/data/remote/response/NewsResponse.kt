@@ -23,7 +23,7 @@ data class NewsResponse(
 fun NewsResponse.toNews(): News {
     return News(
         title = this.title ?: "Unknown Title",
-        author = this.author ?: "Unknown Author",
+        author = if(this.author == null || this.author.isEmpty()) "Unknown Author" else this.author,
         imgUrl = this.urlToImage ?: "",
         elapsed = this.publishedAt.toDateTime().toElapsed(),
         content = this.content ?: "Has Not Content",
