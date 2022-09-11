@@ -62,4 +62,25 @@ class CategoryNewsViewModel @Inject constructor(
             }
         }
     }
+
+    fun refreshCategoryNews() {
+        viewModelScope.launch {
+            _isLoading.postValue(true)
+            when (val result = categoryNewsUseCase.invoke(_category)) {
+                is NetworkResult.Success -> {
+                    val news = result.data
+                    _news.value = news
+                    _isLoading.postValue(false)
+                    _isError.postValue(false)
+                }
+                is NetworkResult.Error -> {
+                    val msg =
+                        result.errorType.toErrorMessage(getApplication<Application>().applicationContext)
+                    _showToast.value = Event(msg)
+                    _isLoading.postValue(false)
+                    _isError.postValue(true)
+                }
+            }
+        }
+    }
 }

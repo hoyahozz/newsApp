@@ -91,7 +91,12 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
         }
 
         binding.categoryNewsErrorRefresh.refresh.setOnClickListener {
-            viewModel.fetchCategoryNews()
+            viewModel.refreshCategoryNews()
+        }
+
+        binding.categoryNewsSwipe.setOnRefreshListener {
+            viewModel.refreshCategoryNews()
+            binding.categoryNewsSwipe.isRefreshing = false
         }
     }
 

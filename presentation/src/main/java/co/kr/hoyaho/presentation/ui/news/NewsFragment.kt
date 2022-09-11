@@ -69,12 +69,23 @@ class NewsFragment : Fragment(), NewsClickListener {
         }
 
         viewModel.isError.observe(viewLifecycleOwner) {
-            if (it) binding.newsErrorRefresh.root.visibility = View.VISIBLE
-            else binding.newsErrorRefresh.root.visibility = View.GONE
+            if (it) {
+                binding.newsRcv.visibility = View.GONE
+                binding.newsErrorRefresh.root.visibility = View.VISIBLE
+            }
+            else {
+                binding.newsRcv.visibility = View.VISIBLE
+                binding.newsErrorRefresh.root.visibility = View.GONE
+            }
         }
 
         binding.newsErrorRefresh.refresh.setOnClickListener {
             viewModel.fetchNews()
+        }
+
+        binding.newsSwipe.setOnRefreshListener {
+            viewModel.fetchNews()
+            binding.newsSwipe.isRefreshing = false
         }
     }
 
