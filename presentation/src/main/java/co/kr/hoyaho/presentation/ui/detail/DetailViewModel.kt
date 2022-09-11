@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.kr.hoyaho.domain.model.News
+import co.kr.hoyaho.domain.usecase.DeleteSavedNewsUseCase
 import co.kr.hoyaho.domain.usecase.GetCheckSavedNewsUseCase
 import co.kr.hoyaho.domain.usecase.SaveNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val saveNewsUseCase: SaveNewsUseCase,
     private val checkSavedNewsUseCase: GetCheckSavedNewsUseCase,
+    private val deleteSavedNewsUseCase: DeleteSavedNewsUseCase
 ) : ViewModel() {
 
     private var _title: String = ""
@@ -49,9 +51,28 @@ class DetailViewModel @Inject constructor(
         _content = news.content
     }
 
-    fun saveNews(news: News) {
+    fun updateSavedState() {
+        when(_isSaved.value) {
+            true -> {
+                deleteSaved()
+                _isSaved.value = false
+            }
+            else -> {
+                saveNews(News(_title, _author, _imgUrl, _elapsed, _content))
+                _isSaved.value = true
+            }
+        }
+    }
+
+    private fun saveNews(news: News) {
         viewModelScope.launch {
             saveNewsUseCase.invoke(news)
+        }
+    }
+
+    private fun deleteSaved() {
+        viewModelScope.launch {
+            deleteSavedNewsUseCase.invoke(_title)
         }
     }
 }

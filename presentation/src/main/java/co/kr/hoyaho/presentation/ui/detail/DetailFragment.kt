@@ -46,7 +46,7 @@ class DetailFragment : Fragment() {
         viewModel.checkIsSaved()
 
         binding.detailSave.setOnClickListener {
-            viewModel.saveNews(args.news)
+            viewModel.updateSavedState()
         }
     }
 }
