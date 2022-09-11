@@ -16,4 +16,12 @@ class SaveRepositoryImpl(
     override suspend fun insertSavedNews(news: News) {
         dao.insertSavedNews(news.toSaveEntity())
     }
+
+    override suspend fun getCheckSavedNews(title: String): Boolean {
+        return dao.checkSavedNews(title) != null
+    }
+
+    override suspend fun deleteSavedNews(title: String) {
+        dao.deleteArticle(title)
+    }
 }
