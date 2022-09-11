@@ -3,12 +3,17 @@ package co.kr.hoyaho.presentation.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import co.kr.hoyaho.domain.model.News
+import co.kr.hoyaho.domain.usecase.SaveNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor() : ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val saveNewsUseCase: SaveNewsUseCase
+) : ViewModel() {
 
     private var _title: MutableLiveData<String> = MutableLiveData()
     val title: LiveData<String> get() = _title
@@ -31,5 +36,11 @@ class DetailViewModel @Inject constructor() : ViewModel() {
         _elapsed = news.elapsed
         _imgUrl = news.imgUrl
         _content = news.content
+    }
+
+    fun saveNews(news: News) {
+        viewModelScope.launch {
+            saveNewsUseCase.invoke(news)
+        }
     }
 }

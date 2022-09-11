@@ -42,5 +42,9 @@ class DetailFragment : Fragment() {
         binding.detailThumbnail.clipToOutline = true
 
         viewModel.setNews(args.news)
+
+        binding.detailSave.setOnClickListener {
+            viewModel.saveNews(args.news)
+        }
     }
 }
