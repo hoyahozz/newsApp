@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.kr.hoyaho.domain.model.News
+import co.kr.hoyaho.domain.usecase.GetCheckSavedNewsUseCase
 import co.kr.hoyaho.domain.usecase.SaveNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,11 +13,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val saveNewsUseCase: SaveNewsUseCase
+    private val saveNewsUseCase: SaveNewsUseCase,
+    private val checkSavedNewsUseCase: GetCheckSavedNewsUseCase,
 ) : ViewModel() {
 
-    private var _title: MutableLiveData<String> = MutableLiveData()
-    val title: LiveData<String> get() = _title
+    private var _title: String = ""
+    val title: String get() = _title
 
     private var _author: String = ""
     val author: String get() = _author
@@ -30,11 +32,20 @@ class DetailViewModel @Inject constructor(
     private var _content: String = ""
     val content: String get() = _content
 
+    private var _isSaved: MutableLiveData<Boolean> = MutableLiveData()
+    val isSaved: LiveData<Boolean> get() = _isSaved
+
+    fun checkIsSaved() {
+        viewModelScope.launch {
+            _isSaved.postValue(checkSavedNewsUseCase.invoke(_title))
+        }
+    }
+
     fun setNews(news: News) {
-        _title.value = news.title
+        _title = news.title
         _author = news.author
-        _elapsed = news.elapsed
         _imgUrl = news.imgUrl
+        _elapsed = news.elapsed
         _content = news.content
     }
 

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="21dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_empty_star"
+                android:src="@{vm.isSaved ? @drawable/ic_star : @drawable/ic_empty_star}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

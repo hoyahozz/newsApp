@@ -36,12 +36,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         sharedViewModel.updateToolbarState(args.news.title, true)
 
         binding.detailThumbnail.clipToOutline = true
 
         viewModel.setNews(args.news)
+        viewModel.checkIsSaved()
 
         binding.detailSave.setOnClickListener {
             viewModel.saveNews(args.news)
