@@ -21,4 +21,14 @@ class NewsRepositoryImpl(
             NetworkResult.Error(errorType)
         }
     }
+
+    override suspend fun getCategoryNews(category: String): NetworkResult<List<News>> {
+        return try {
+            val response = api.getCategoryNews(category).articles.map { it.toNews() }
+            NetworkResult.Success(response)
+        } catch (exception: Exception) {
+            val errorType = networkErrorHandler.getError(exception)
+            NetworkResult.Error(errorType)
+        }
+    }
 }
