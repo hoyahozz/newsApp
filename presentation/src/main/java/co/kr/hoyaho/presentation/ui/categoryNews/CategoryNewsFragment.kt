@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.FragmentCategoryNewsBinding
 import co.kr.hoyaho.presentation.ui.main.MainViewModel
@@ -18,6 +19,8 @@ class CategoryNewsFragment : Fragment() {
 
     private val sharedViewModel: MainViewModel by activityViewModels()
 
+    private val args: CategoryNewsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,10 +31,9 @@ class CategoryNewsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        sharedViewModel.updateToolbarState(
-            getString(
+        sharedViewModel.updateToolbarState(getString(
                 R.string.category_news_toolbar_title,
-                "sports"
+                args.category
             ), true
         )
     }

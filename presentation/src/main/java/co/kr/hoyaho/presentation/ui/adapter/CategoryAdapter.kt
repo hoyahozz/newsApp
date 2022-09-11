@@ -2,8 +2,10 @@ package co.kr.hoyaho.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import co.kr.hoyaho.presentation.databinding.ItemCategoryBinding
+import co.kr.hoyaho.presentation.ui.category.CategoryFragmentDirections
 import co.kr.hoyaho.presentation.ui.model.Category
 
 class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -13,12 +15,14 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
     inner class CategoryViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Category) {
+            val nameLowerCase = item.name.lowercase()
 
             binding.image.setImageResource(item.image)
-            binding.title.text = item.name.lowercase()
+            binding.title.text = nameLowerCase
 
             binding.container.setOnClickListener { view ->
-
+                view.findNavController()
+                    .navigate(CategoryFragmentDirections.actionCategoryToCategoryNews(nameLowerCase.replaceFirstChar { it.uppercase() }))
             }
         }
     }

@@ -9,5 +9,18 @@
         android:id="@+id/categoryScreen"
         android:name="co.kr.hoyaho.presentation.ui.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_category_to_categoryNews"
+            app:destination="@id/categoryNewsScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryNewsScreen"
+        android:name="co.kr.hoyaho.presentation.ui.categoryNews.CategoryNewsFragment"
+        android:label="CategoryNewsScreen"
+        tools:layout="@layout/fragment_category_news">
+        <argument
+            android:name="category"
+            app:argType="string" />
+    </fragment>
 </navigation>
