@@ -1,21 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.detail.DetailFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="detail"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingHorizontal="16dp"
+            tools:context=".ui.detail.DetailFragment">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:includeFontPadding="false"
+                android:text="@{vm.title}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_empty_star"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detail_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:includeFontPadding="false"
+                android:text="@{vm.author}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+
+            <TextView
+                android:id="@+id/detail_elapsed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="14dp"
+                android:includeFontPadding="false"
+                android:text="@{vm.elapsed}"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/detail_author"
+                app:layout_constraintTop_toBottomOf="@id/detail_title" />
+
+            <ImageView
+                android:id="@+id/detail_thumbnail"
+                bind_load_url="@{vm.imgUrl}"
+                android:layout_width="0dp"
+                android:layout_height="218dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_radius_corner_10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_not_found"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_author" />
+
+            <TextView
+                android:id="@+id/detail_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:paddingBottom="16dp"
+                android:text="@{vm.content}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_thumbnail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <data>
+
+        <variable
+            name="vm"
+            type="co.kr.hoyaho.presentation.ui.detail.DetailViewModel" />
+    </data>
 </layout>

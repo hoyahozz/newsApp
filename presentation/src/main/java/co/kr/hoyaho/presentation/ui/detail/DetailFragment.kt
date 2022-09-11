@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.FragmentDetailBinding
@@ -19,6 +20,7 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: DetailViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     private val args: DetailFragmentArgs by navArgs()
@@ -33,6 +35,12 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = viewModel
+
         sharedViewModel.updateToolbarState(args.news.title, true)
+
+        binding.detailThumbnail.clipToOutline = true
+
+        viewModel.setNews(args.news)
     }
 }
