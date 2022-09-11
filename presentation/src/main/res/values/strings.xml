@@ -11,6 +11,9 @@
     <string name="category_toolbar_title">Category</string>
     <string name="category_msg">Choose a category to start reading</string>
 
+    <!-- category news -->
+    <string name="category_news_toolbar_title">Category - %1$s</string>
+
     <!-- save -->
     <string name="save_toolbar_title">Saved News</string>
 
