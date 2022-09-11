@@ -3,6 +3,7 @@ package co.kr.hoyaho.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import co.kr.hoyaho.data.util.toDateTime
 import co.kr.hoyaho.data.util.toElapsed
 import co.kr.hoyaho.domain.model.News
 
@@ -20,9 +21,9 @@ fun SaveEntity.toNews(): News {
         title = this.title,
         author = this.author,
         imgUrl = this.imgUrl,
-        elapsed = this.publishedAt.toElapsed(),
+        elapsed = this.publishedAt.toDateTime().toElapsed(),
         content = this.content,
-        publishedAt = this.publishedAt
+        publishedAt = this.publishedAt.toDateTime().toString()
     )
 }
 

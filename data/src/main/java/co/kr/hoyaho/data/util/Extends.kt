@@ -14,10 +14,14 @@ private object MAXIMUM {
 
 private val parseFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.KOREA)
 
-fun String.toElapsed(): String {
+fun String?.toDateTime(): Long {
+    return if (this == null) Date().time
+    else parseFormat.parse(this)?.time ?: Date().time
+}
 
+fun Long.toElapsed(): String {
     val curTime = System.currentTimeMillis()
-    val regTime = parseFormat.parse(this)?.time ?: Date().time
+    val regTime = this
     var diffTime = (curTime - regTime) / 1000
 
     return when {

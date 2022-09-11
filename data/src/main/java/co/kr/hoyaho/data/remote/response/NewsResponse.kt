@@ -1,5 +1,6 @@
 package co.kr.hoyaho.data.remote.response
 
+import co.kr.hoyaho.data.util.toDateTime
 import co.kr.hoyaho.data.util.toElapsed
 import co.kr.hoyaho.domain.model.News
 
@@ -24,8 +25,8 @@ fun NewsResponse.toNews(): News {
         title = this.title ?: "Unknown Title",
         author = this.author ?: "Unknown Author",
         imgUrl = this.urlToImage ?: "",
-        elapsed = this.publishedAt?.toElapsed() ?: "Unknown Time",
+        elapsed = this.publishedAt.toDateTime().toElapsed(),
         content = this.content ?: "Has Not Content",
-        publishedAt = this.publishedAt ?: "Unknown Time"
+        publishedAt = this.publishedAt ?: this.publishedAt.toDateTime().toString()
     )
 }
