@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.FragmentCategoryBinding
+import co.kr.hoyaho.presentation.ui.adapter.CategoryAdapter
 import co.kr.hoyaho.presentation.ui.main.MainViewModel
+import co.kr.hoyaho.presentation.ui.util.GridItemOffsetDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +22,8 @@ class CategoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val sharedViewModel: MainViewModel by activityViewModels()
+
+    private lateinit var adapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +36,15 @@ class CategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         sharedViewModel.updateToolbarState(getString(R.string.category_toolbar_title), false)
+
+        adapter = CategoryAdapter()
+
+        binding.categoryRcv.apply {
+            this.adapter = this@CategoryFragment.adapter
+            this.layoutManager = GridLayoutManager(requireActivity(), 3)
+            this.addItemDecoration(GridItemOffsetDecoration(36, 29))
+            this.setHasFixedSize(true)
+        }
     }
 
     override fun onDestroyView() {
