@@ -24,7 +24,8 @@ fun NewsResponse.toNews(): News {
         title = this.title ?: "Unknown Title",
         author = this.author ?: "Unknown Author",
         imgUrl = this.urlToImage ?: "",
-        elapsed = this.publishedAt?.toElapsed() ?: "",
-        content = this.content ?: "Has Not Content"
+        elapsed = this.publishedAt?.toElapsed() ?: "Unknown Time",
+        content = this.content ?: "Has Not Content",
+        publishedAt = this.publishedAt ?: "Unknown Time"
     )
 }

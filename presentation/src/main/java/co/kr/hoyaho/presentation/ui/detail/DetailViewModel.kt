@@ -34,6 +34,8 @@ class DetailViewModel @Inject constructor(
     private var _content: String = ""
     val content: String get() = _content
 
+    private var _publishedAt: String = ""
+
     private var _isSaved: MutableLiveData<Boolean> = MutableLiveData()
     val isSaved: LiveData<Boolean> get() = _isSaved
 
@@ -49,6 +51,7 @@ class DetailViewModel @Inject constructor(
         _imgUrl = news.imgUrl
         _elapsed = news.elapsed
         _content = news.content
+        _publishedAt = news.publishedAt
     }
 
     fun updateSavedState() {
@@ -58,7 +61,7 @@ class DetailViewModel @Inject constructor(
                 _isSaved.value = false
             }
             else -> {
-                saveNews(News(_title, _author, _imgUrl, _elapsed, _content))
+                saveNews(News(_title, _author, _imgUrl, _elapsed, _content, _publishedAt))
                 _isSaved.value = true
             }
         }

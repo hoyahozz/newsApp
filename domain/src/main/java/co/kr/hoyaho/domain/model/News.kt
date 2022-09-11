@@ -8,6 +8,7 @@ import java.io.Serializable
  * @property imgUrl : 뉴스 이미지 URL
  * @property elapsed : 뉴스 작성 후 경과 시간
  * @property content : 뉴스 본문
+ * @property publishedAt : 뉴스 작성 시간
  */
 
 data class News(
@@ -15,5 +16,6 @@ data class News(
     val author: String,
     val imgUrl: String,
     val elapsed: String,
-    val content: String
+    val content: String,
+    val publishedAt: String
 ) : Serializable
