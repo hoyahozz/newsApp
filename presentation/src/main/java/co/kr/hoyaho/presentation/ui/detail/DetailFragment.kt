@@ -38,15 +38,31 @@ class DetailFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        sharedViewModel.updateToolbarState(args.news.title, true)
+        setupToolbarState()
+        setupThumbnail()
+        initState()
+        setupSavedButton()
+    }
 
+    private fun setupToolbarState() = sharedViewModel.updateToolbarState(args.news.title, true)
+
+    private fun setupThumbnail() {
         binding.detailThumbnail.clipToOutline = true
+    }
 
+    private fun initState() {
         viewModel.setNews(args.news)
         viewModel.checkIsSaved()
+    }
 
+    private fun setupSavedButton() {
         binding.detailSave.setOnClickListener {
             viewModel.updateSavedState()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

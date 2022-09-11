@@ -49,15 +49,21 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        sharedViewModel.updateToolbarState(
-            getString(
-                R.string.category_news_toolbar_title,
-                args.category
-            ), true
-        )
+        setupToolbarState()
+        setupAdapter()
+        initState()
+        setupDataBinding()
+        setupRefresh()
+    }
 
-        viewModel.setCategory(args.category)
+    private fun setupToolbarState() = sharedViewModel.updateToolbarState(
+        getString(
+            R.string.category_news_toolbar_title,
+            args.category
+        ), true
+    )
 
+    private fun setupAdapter() {
         adapter = NewsAdapter().apply { setItemClickListener(this@CategoryNewsFragment) }
 
         binding.categoryNewsRcv.apply {
@@ -65,7 +71,11 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
         }
+    }
 
+    private fun initState() = viewModel.setCategory(args.category)
+
+    private fun setupDataBinding() {
         viewModel.showToast.observe(viewLifecycleOwner, EventObserver { msg ->
             Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
         })
@@ -75,7 +85,7 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if(it) loadingDialog.show()
+            if (it) loadingDialog.show()
             else loadingDialog.dismiss()
         }
 
@@ -83,13 +93,14 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
             if (it) {
                 binding.categoryNewsRcv.visibility = View.GONE
                 binding.categoryNewsErrorRefresh.root.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 binding.categoryNewsRcv.visibility = View.VISIBLE
                 binding.categoryNewsErrorRefresh.root.visibility = View.GONE
             }
         }
+    }
 
+    private fun setupRefresh() {
         binding.categoryNewsErrorRefresh.refresh.setOnClickListener {
             viewModel.refreshCategoryNews()
         }
@@ -102,5 +113,10 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
 
     override fun navigateToDetail(news: News) {
         findNavController().navigate(CategoryNewsFragmentDirections.actionCategoryNewsToDetail(news))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

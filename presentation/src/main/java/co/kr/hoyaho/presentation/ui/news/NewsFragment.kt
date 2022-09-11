@@ -45,8 +45,16 @@ class NewsFragment : Fragment(), NewsClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbarState()
+        setupAdapter()
+        setupDataBinding()
+        setupRefresh()
+    }
+
+    private fun setupToolbarState() =
         sharedViewModel.updateToolbarState(getString(R.string.news_toolbar_title), false)
 
+    private fun setupAdapter() {
         adapter = NewsAdapter().apply { setItemClickListener(this@NewsFragment) }
 
         binding.newsRcv.apply {
@@ -54,7 +62,9 @@ class NewsFragment : Fragment(), NewsClickListener {
             this.layoutManager = LinearLayoutManager(requireActivity())
             this.setHasFixedSize(true)
         }
+    }
 
+    private fun setupDataBinding() {
         viewModel.showToast.observe(viewLifecycleOwner, EventObserver { msg ->
             Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
         })
@@ -72,13 +82,14 @@ class NewsFragment : Fragment(), NewsClickListener {
             if (it) {
                 binding.newsRcv.visibility = View.GONE
                 binding.newsErrorRefresh.root.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 binding.newsRcv.visibility = View.VISIBLE
                 binding.newsErrorRefresh.root.visibility = View.GONE
             }
         }
+    }
 
+    private fun setupRefresh() {
         binding.newsErrorRefresh.refresh.setOnClickListener {
             viewModel.fetchNews()
         }
@@ -89,12 +100,12 @@ class NewsFragment : Fragment(), NewsClickListener {
         }
     }
 
+    override fun navigateToDetail(news: News) {
+        findNavController().navigate(NewsFragmentDirections.actionNewsToDetail(news))
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun navigateToDetail(news: News) {
-        findNavController().navigate(NewsFragmentDirections.actionNewsToDetail(news))
     }
 }

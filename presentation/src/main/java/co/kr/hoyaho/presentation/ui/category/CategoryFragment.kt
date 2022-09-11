@@ -35,8 +35,14 @@ class CategoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbarState()
+        setupAdapter()
+    }
+
+    private fun setupToolbarState() =
         sharedViewModel.updateToolbarState(getString(R.string.category_toolbar_title), false)
 
+    private fun setupAdapter() {
         adapter = CategoryAdapter()
 
         binding.categoryRcv.apply {

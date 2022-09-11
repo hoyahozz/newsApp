@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
+        setupNavigation()
+    }
+
+    private fun setupNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_nav_container) as NavHostFragment
         val navController = navHostFragment.navController
