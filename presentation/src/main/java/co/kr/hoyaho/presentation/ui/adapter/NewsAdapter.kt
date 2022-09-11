@@ -2,22 +2,25 @@ package co.kr.hoyaho.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import co.kr.hoyaho.domain.model.News
 import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.ItemNewsBinding
-import co.kr.hoyaho.presentation.ui.news.NewsFragmentDirections
 import com.bumptech.glide.Glide
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     private val news = ArrayList<News>()
+    private var itemClickListener: NewsClickListener? = null
 
     fun submitList(news: List<News>) {
         this.news.clear()
         this.news.addAll(news)
         notifyDataSetChanged()
+    }
+
+    fun setItemClickListener(listener: NewsClickListener) {
+        itemClickListener = listener
     }
 
     inner class NewsViewHolder(private val binding: ItemNewsBinding) :
@@ -34,8 +37,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
                 .error(R.drawable.img_not_found)
                 .into(binding.thumbnail)
 
-            binding.container.setOnClickListener { view ->
-                view.findNavController().navigate(NewsFragmentDirections.actionNewsToDetail(item))
+            binding.container.setOnClickListener {
+                itemClickListener?.navigateToDetail(item)
             }
         }
     }
@@ -52,4 +55,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         holder.bind(news[position])
 
     override fun getItemCount(): Int = news.size
+}
+
+interface NewsClickListener {
+    fun navigateToDetail(news: News)
 }
