@@ -9,5 +9,18 @@
         android:id="@+id/saveScreen"
         android:name="co.kr.hoyaho.presentation.ui.save.SaveFragment"
         android:label="fragment_save"
-        tools:layout="@layout/fragment_save" />
+        tools:layout="@layout/fragment_save" >
+        <action
+            android:id="@+id/action_save_to_detail"
+            app:destination="@id/detailScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailScreen"
+        android:name="co.kr.hoyaho.presentation.ui.detail.DetailFragment"
+        android:label="DetailScreen"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="news"
+            app:argType="co.kr.hoyaho.domain.model.News" />
+    </fragment>
 </navigation>
