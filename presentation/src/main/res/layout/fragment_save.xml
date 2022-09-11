@@ -8,16 +8,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.save.SaveFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/save_rcv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
-            android:text="Save"
-            android:textSize="24sp"
+            android:clipToPadding="false"
+            android:paddingTop="17dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_news" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
