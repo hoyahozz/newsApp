@@ -16,6 +16,7 @@
 
     <!-- save -->
     <string name="save_toolbar_title">Saved News</string>
+    <string name="save_empty_msg">There is no saved news list.</string>
 
     <!-- error message -->
     <string name="error_msg">An error occurred during\nnetwork communication.</string>

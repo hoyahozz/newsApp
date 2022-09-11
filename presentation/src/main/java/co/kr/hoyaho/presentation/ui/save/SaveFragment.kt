@@ -49,7 +49,12 @@ class SaveFragment : Fragment(), NewsClickListener {
         }
 
         viewModel.news.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            if(it.isEmpty()) binding.saveEmptyNews.visibility = View.VISIBLE
+            else {
+                binding.saveEmptyNews.visibility = View.GONE
+                adapter.submitList(it)
+            }
+
         }
     }
 
