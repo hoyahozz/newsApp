@@ -78,6 +78,21 @@ class CategoryNewsFragment : Fragment(), NewsClickListener {
             if(it) loadingDialog.show()
             else loadingDialog.dismiss()
         }
+
+        viewModel.isError.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.categoryNewsRcv.visibility = View.GONE
+                binding.categoryNewsErrorRefresh.root.visibility = View.VISIBLE
+            }
+            else {
+                binding.categoryNewsRcv.visibility = View.VISIBLE
+                binding.categoryNewsErrorRefresh.root.visibility = View.GONE
+            }
+        }
+
+        binding.categoryNewsErrorRefresh.refresh.setOnClickListener {
+            viewModel.fetchCategoryNews()
+        }
     }
 
     override fun navigateToDetail(news: News) {

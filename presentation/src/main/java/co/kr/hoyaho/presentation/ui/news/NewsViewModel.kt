@@ -29,11 +29,14 @@ class NewsViewModel @Inject constructor(
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isError: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: LiveData<Boolean> = _isError
+
     init {
         fetchNews()
     }
 
-    private fun fetchNews() {
+    fun fetchNews() {
         viewModelScope.launch {
             _isLoading.postValue(true)
             when (val result = headLineNewsUseCase.invoke()) {
@@ -41,11 +44,13 @@ class NewsViewModel @Inject constructor(
                     val news = result.data
                     _news.value = news
                     _isLoading.postValue(false)
+                    _isError.postValue(false)
                 }
                 is NetworkResult.Error -> {
                     val msg = result.errorType.toErrorMessage(getApplication<Application>().applicationContext)
                     _showToast.value = Event(msg)
                     _isLoading.postValue(false)
+                    _isError.postValue(true)
                 }
             }
         }

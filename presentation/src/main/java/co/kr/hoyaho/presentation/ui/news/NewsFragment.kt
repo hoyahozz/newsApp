@@ -64,8 +64,17 @@ class NewsFragment : Fragment(), NewsClickListener {
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if(it) loadingDialog.show()
+            if (it) loadingDialog.show()
             else loadingDialog.dismiss()
+        }
+
+        viewModel.isError.observe(viewLifecycleOwner) {
+            if (it) binding.newsErrorRefresh.root.visibility = View.VISIBLE
+            else binding.newsErrorRefresh.root.visibility = View.GONE
+        }
+
+        binding.newsErrorRefresh.refresh.setOnClickListener {
+            viewModel.fetchNews()
         }
     }
 
