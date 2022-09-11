@@ -9,8 +9,6 @@ import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.ItemNewsBinding
 import co.kr.hoyaho.presentation.ui.news.NewsFragmentDirections
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
@@ -28,13 +26,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             binding.title.text = item.title
             binding.writer.text = item.author
             binding.time.text = item.elapsed
+            binding.thumbnail.clipToOutline = true
 
-            // TODO : Glide 에서 Error 는 transform 을 지원하지 않음
             Glide.with(binding.root.context)
                 .load(item.imgUrl)
                 .placeholder(R.color.gray)
                 .error(R.drawable.img_not_found)
-                .transform(CenterCrop(), RoundedCorners(4))
                 .into(binding.thumbnail)
 
             binding.container.setOnClickListener { view ->
