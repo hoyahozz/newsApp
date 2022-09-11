@@ -1,4 +1,4 @@
-package co.kr.hoyaho.data.remote.entity
+package co.kr.hoyaho.data.remote.response
 
 import co.kr.hoyaho.data.util.toElapsed
 import co.kr.hoyaho.domain.model.News

@@ -1,6 +1,6 @@
 package co.kr.hoyaho.data.remote.api
 
-import co.kr.hoyaho.data.remote.entity.NewsResponseHeader
+import co.kr.hoyaho.data.remote.response.NewsResponseHeader
 import retrofit2.http.GET
 import retrofit2.http.Query
 

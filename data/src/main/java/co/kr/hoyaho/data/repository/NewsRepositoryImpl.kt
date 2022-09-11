@@ -1,7 +1,7 @@
 package co.kr.hoyaho.data.repository
 
 import co.kr.hoyaho.data.remote.api.NewsApi
-import co.kr.hoyaho.data.remote.entity.toNews
+import co.kr.hoyaho.data.remote.response.toNews
 import co.kr.hoyaho.domain.NetworkResult
 import co.kr.hoyaho.domain.interactor.NetworkErrorHandler
 import co.kr.hoyaho.domain.model.News
