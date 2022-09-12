@@ -2,22 +2,15 @@ package co.kr.hoyaho.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import co.kr.hoyaho.domain.model.News
-import co.kr.hoyaho.presentation.R
 import co.kr.hoyaho.presentation.databinding.ItemNewsBinding
-import com.bumptech.glide.Glide
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter : ListAdapter<News, NewsAdapter.NewsViewHolder>(diffUtil) {
 
-    private val news = ArrayList<News>()
     private var itemClickListener: NewsClickListener? = null
-
-    fun submitList(news: List<News>) {
-        this.news.clear()
-        this.news.addAll(news)
-        notifyDataSetChanged()
-    }
 
     fun setItemClickListener(listener: NewsClickListener) {
         itemClickListener = listener
@@ -45,9 +38,17 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) =
-        holder.bind(news[position])
+        holder.bind(getItem(position))
 
-    override fun getItemCount(): Int = news.size
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<News>() {
+            override fun areContentsTheSame(oldItem: News, newItem: News) =
+                oldItem == newItem
+
+            override fun areItemsTheSame(oldItem: News, newItem: News) =
+                oldItem.hashCode() == newItem.hashCode()
+        }
+    }
 }
 
 interface NewsClickListener {
