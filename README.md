@@ -57,6 +57,7 @@
 </p>
 
 - **내부 데이터베이스에 저장된 뉴스를 조회**할 수 있습니다.
+- **가장 최근에 게재된 순서대로 화면에 출력**됩니다.
 - 별 모양의 버튼을 클릭하여 내부 데이터베이스에 해당 뉴스를 추가 및 삭제할 수 있고, 이는 화면에도 바로 표현됩니다.
 - **저장된 뉴스가 없을 경우 유저에게 안내 메시지를 출력**합니다.
 - **엡 종료 후 재실행하여도 해당 뉴스 데이터는 유지됩니다.**
@@ -121,6 +122,15 @@
 # Tech Stack
 
 **`Clean Architecture`**, **`MVVM`**, **`Multi Module`**, `Kotlin`, `Navigation`, `Hilt`, `Okhttp3`, `Retrofit2`, `Room`, `Glide`, `Databinding`, `BindingAdapter`, `ListAdapter`, `LiveData`, `SwipeRefreshLayout`
+
+# Commit Convention
+
+- `feat : {something}` : 기능 추가
+- `fix : {something}` : 문제 해결
+- `refactor : {something}` : 코드 개선
+- `chore : {something}` : 프로젝트 세팅
+- `rename : {something}` : 단순 네이밍 변경
+- `docs : {something}` : `README` 등 문서를 수정하는 경우
 
 # Environment
 
