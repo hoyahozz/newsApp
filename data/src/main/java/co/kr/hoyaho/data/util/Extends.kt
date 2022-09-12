@@ -28,8 +28,8 @@ fun Long.toElapsed(): String {
         diffTime < MAXIMUM.SEC -> "a moment ago"
         MAXIMUM.SEC.let { diffTime /= it; diffTime } < MAXIMUM.MIN -> "$diffTime minutes ago"
         MAXIMUM.MIN.let { diffTime /= it; diffTime } < MAXIMUM.HOUR -> "$diffTime hours ago"
-        MAXIMUM.HOUR.let { diffTime /= it; diffTime } < MAXIMUM.DAY -> "$diffTime minutes ago"
-        MAXIMUM.DAY.let { diffTime /= it; diffTime } < MAXIMUM.MONTH -> "$diffTime days ago"
-        else -> "$diffTime months ago"
+        MAXIMUM.HOUR.let { diffTime /= it; diffTime } < MAXIMUM.DAY -> "$diffTime days ago"
+        MAXIMUM.DAY.let { diffTime /= it; diffTime } < MAXIMUM.MONTH -> "$diffTime months ago"
+        else -> "$diffTime years ago"
     }
 }
