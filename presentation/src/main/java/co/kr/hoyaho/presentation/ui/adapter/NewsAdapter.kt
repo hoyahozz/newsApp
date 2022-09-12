@@ -26,16 +26,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     inner class NewsViewHolder(private val binding: ItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: News) {
-            binding.title.text = item.title
-            binding.writer.text = item.author
-            binding.time.text = item.elapsed
-            binding.thumbnail.clipToOutline = true
+            binding.news = item
 
-            Glide.with(binding.root.context)
-                .load(item.imgUrl)
-                .placeholder(R.color.gray)
-                .error(R.drawable.img_not_found)
-                .into(binding.thumbnail)
+            binding.thumbnail.clipToOutline = true
 
             binding.container.setOnClickListener {
                 itemClickListener?.navigateToDetail(item)

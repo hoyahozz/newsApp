@@ -21,7 +21,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -29,6 +28,7 @@
             android:includeFontPadding="false"
             android:maxEms="5"
             android:maxLines="1"
+            android:text="@{title}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -37,4 +37,12 @@
             app:layout_constraintTop_toBottomOf="@id/image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+    </data>
+
 </layout>

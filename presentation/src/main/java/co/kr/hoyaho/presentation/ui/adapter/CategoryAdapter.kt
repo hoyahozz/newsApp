@@ -18,7 +18,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
             val nameLowerCase = item.name.lowercase()
 
             binding.image.setImageResource(item.image)
-            binding.title.text = nameLowerCase
+            binding.title = nameLowerCase
 
             binding.container.setOnClickListener { view ->
                 view.findNavController()

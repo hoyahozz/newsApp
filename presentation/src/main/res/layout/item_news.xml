@@ -29,6 +29,7 @@
 
                 <ImageView
                     android:id="@+id/thumbnail"
+                    bind_load_url="@{news.imgUrl}"
                     android:layout_width="0dp"
                     android:layout_height="130dp"
                     android:layout_margin="1dp"
@@ -46,6 +47,7 @@
                     android:ellipsize="end"
                     android:includeFontPadding="false"
                     android:maxLines="2"
+                    android:text="@{news.title}"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -66,13 +68,14 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <TextView
-                        android:id="@+id/writer"
+                        android:id="@+id/author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:includeFontPadding="false"
                         android:maxEms="8"
                         android:maxLines="1"
+                        android:text="@{news.author}"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -83,10 +86,11 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/time"
+                        android:id="@+id/elapsed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
+                        android:text="@{news.elapsed}"
                         android:textColor="@color/gray"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -95,4 +99,12 @@
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="news"
+            type="co.kr.hoyaho.domain.model.News" />
+
+    </data>
 </layout>
